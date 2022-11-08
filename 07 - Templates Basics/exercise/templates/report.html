@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+    {% if result != [] %}
+        <div class="jumbotron">
+            <h2>Let see how you performed!!</h2>
+            <br>
+            <h2>Oh no! Looks like you had issues with your username!</h2>
+            <br>
+            <h2>Here are the requirements you failed:</h2>
+            <br>
+            <ul>
+                {% for erro in result %}
+                    <li><h2>{{ erro }}</h2></li>
+                {% endfor %}
+                
+            </ul>
+            
+        </div>
+    {% else %}
+        <div class="jumbotron">
+            <h2>Let see how you performed!!</h2>
+            <br>
+            <h2>Your username passer the 3 requirements!</h2>
+        </div>
+
+    {% endif %}
+    
+
+    
+{% endblock %}
