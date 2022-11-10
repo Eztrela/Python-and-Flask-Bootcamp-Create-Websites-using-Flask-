@@ -1,0 +1,26 @@
+# myproject/owners/views.py
+
+from flask import Blueprint,render_template,redirect,url_for
+from myproject import db
+from myproject.model import Owner
+from myproject.owners.forms import AddForm
+
+owners_blueprint = Blueprint('owners',__name__,template_folder='templates/owners')
+
+
+@owners_blueprint.route('/add',methods=['GET', 'POST'])
+def add():
+
+    form = AddForm()
+
+    if form.validate_on_submit():
+        owner_name = form.owner_name.data
+        pup_id = form.pup_id.data
+        new_owner = Owner(owner_name,pup_id)
+        db.session.add(new_owner)
+        db.session.commit()
+
+        return redirect(url_for('puppies.list'))
+
+
+    return render_template('add_owner.html',form=form)

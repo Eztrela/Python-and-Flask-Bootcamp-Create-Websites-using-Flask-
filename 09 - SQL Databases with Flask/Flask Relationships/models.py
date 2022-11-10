@@ -44,7 +44,7 @@ class Toy(db.Model):
     __tablename__ = 'toys'
     id = db.Column(db.Integer,primary_key=True)
     item_name = db.Column(db.Text)
-    puppy_id = db.Column(db.Integer,db.ForeignKey('Puppies.id'))
+    puppy_id = db.Column(db.Integer,db.ForeignKey('puppies.id'))
 
     def __init__(self,item_name, puppy_id) -> None:
         self.item_name = item_name
@@ -55,17 +55,13 @@ class Owner(db.Model):
     __tablename__ = 'owners'
     id = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.Text)
-    puppy_id = db.Column(db.Integer,db.ForeignKey('Puppies.id'))
+    puppy_id = db.Column(db.Integer,db.ForeignKey('puppies.id'))
 
     def __init__(self,name, puppy_id) -> None:
         self.name = name
         self.puppy_id = puppy_id
     
 
-
-@app.route('/')
-def index():
-    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
